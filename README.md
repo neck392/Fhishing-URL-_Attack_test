@@ -1,4 +1,4 @@
-# Fhishing-URL-_Attack_test
+# FhishingURL_Attack_test
 ### Study Spearphishing Link Attack
 <ol>
 <li>requests 및 BeautifulSoup 라이브러리 import</li>
